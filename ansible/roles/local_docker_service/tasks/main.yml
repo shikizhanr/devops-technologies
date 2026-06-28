@@ -1,0 +1,21 @@
+---
+- name: Log into GitHub Container Registry (if token is provided)
+  community.docker.docker_login:
+    registry: ghcr.io
+    username: "{{ github_username }}"
+    password: "{{ github_token }}"
+  when: github_token is defined and github_token | length > 0
+
+- name: Pull Docker image from GHCR
+  community.docker.docker_image:
+    name: "ghcr.io/{{ github_username }}/{{ image_name }}:{{ image_tag }}"
+    source: pull
+
+- name: Run application container
+  community.docker.docker_container:
+    name: my_ansible_app
+    image: "ghcr.io/{{ github_username }}/{{ image_name }}:{{ image_tag }}"
+    state: started
+    ports:
+      - "5000:5000"
+    restart_policy: always
