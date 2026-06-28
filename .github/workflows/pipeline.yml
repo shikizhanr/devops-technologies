@@ -30,4 +30,4 @@ jobs:
           context: .
           push: true
 
-          tags: ghcr.io/shikizhanr/my-web-app:latest
+          tags: ghcr.io/shikizhanr/devops-technologies:latest
