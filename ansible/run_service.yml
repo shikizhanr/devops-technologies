@@ -1,0 +1,5 @@
+---
+- name: Deploy app locally via Ansible
+  hosts: localhost
+  roles:
+    - local_docker_service
